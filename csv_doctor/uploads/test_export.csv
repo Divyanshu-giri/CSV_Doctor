@@ -1,0 +1,26 @@
+product_id,product_name,category,price,quantity_sold,rating,date,stock_level,supplier_id
+1,Laptop Pro,Electronics,1299.99,45,4.8,2023-01-15,120.0,S001
+2,USB Cable,Electronics,9.99,500,4.2,2023-01-16,2000.0,S002
+3,Desk Chair,Furniture,249.99,28,4.5,2023-01-17,80.0,S003
+4,"Monitor 27""",Electronics,399.99,35,4.6,2023-01-18,150.0,S001
+5,Keyboard,Electronics,79.99,120,4.3,2023-01-19,400.0,S002
+6,Mouse,Electronics,,145,4.4,2023-01-20,600.0,S002
+7,Desk Lamp,Furniture,45.99,68,4.1,2023-01-21,200.0,S004
+8,Standing Desk,Furniture,599.99,15,4.7,2023-01-22,50.0,S003
+9,Monitor Stand,Furniture,34.99,95,3.9,2023-01-23,300.0,S004
+10,HDMI Cable,Electronics,12.99,300,4.5,2023-01-24,,S002
+11,Power Bank,Electronics,49.99,200,4.2,2023-01-25,500.0,S005
+12,External SSD,Electronics,119.99,90,4.6,2023-01-26,250.0,S001
+13,Office Chair,Furniture,199.99,40,4.4,2023-01-27,120.0,S003
+14,Bookshelf,Furniture,149.99,25,4.0,2023-01-28,100.0,S004
+15,Desk Organizer,Furniture,29.99,150,3.8,2023-01-29,600.0,S004
+16,Screen Protector,Electronics,14.99,400,4.1,2023-01-30,1200.0,S002
+17,Phone Stand,Electronics,19.99,250,4.3,2023-02-01,800.0,S005
+18,Cable Organizer,Furniture,12.99,300,3.7,2023-02-02,900.0,S004
+19,Monitor Arm,Furniture,89.99,55,4.5,2023-02-03,200.0,S003
+20,USB Hub,Electronics,34.99,180,4.2,2023-02-04,,S002
+21,Desk Pad,Furniture,24.99,200,3.9,2023-02-05,700.0,S004
+22,Portable Charger,Electronics,59.99,160,4.4,2023-02-06,400.0,S005
+23,Document Holder,Furniture,14.99,220,3.6,2023-02-07,800.0,S004
+24,Webcam,Electronics,79.99,75,4.5,2023-02-08,300.0,S001
+25,Microphone,Electronics,129.99,50,4.6,2023-02-09,180.0,S005

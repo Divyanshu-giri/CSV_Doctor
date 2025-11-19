@@ -29,6 +29,29 @@ app.config['UPLOAD_FOLDER'] = 'uploads'
 # Create upload directory
 create_upload_dir()
 
+# Detect optional export engines
+def _detect_optional_export_engines():
+    engines = {
+        'excel': False,
+        'parquet': False
+    }
+    try:
+        import openpyxl  # noqa: F401
+        engines['excel'] = True
+    except Exception:
+        engines['excel'] = False
+
+    try:
+        import pyarrow  # noqa: F401
+        engines['parquet'] = True
+    except Exception:
+        engines['parquet'] = False
+
+    return engines
+
+# Store export support info in app config
+app.config['EXPORT_SUPPORT'] = _detect_optional_export_engines()
+
 # Global storage for session data
 sessions = {}
 
@@ -355,6 +378,15 @@ def export_data():
     
     except Exception as e:
         print(f"Export error: {traceback.format_exc()}")
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/api/features', methods=['GET'])
+def get_features():
+    """Return available optional features (e.g., export support)"""
+    try:
+        return jsonify({'export_support': app.config.get('EXPORT_SUPPORT', {})})
+    except Exception as e:
         return jsonify({'error': str(e)}), 500
 
 

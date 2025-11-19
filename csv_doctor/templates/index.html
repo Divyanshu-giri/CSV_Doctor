@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV Doctor - Smart CSV Cleaner and Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <h1>🏥 CSV Doctor</h1>
+                <p>Smart CSV Cleaner and Analyzer</p>
+            </div>
+            <nav class="nav">
+                <a href="#" onclick="showTab('upload')">Upload</a>
+                <a href="#" onclick="showTab('clean')">Clean</a>
+                <a href="#" onclick="showTab('analyze')">Analyze</a>
+                <a href="#" onclick="showTab('export')">Export</a>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Upload Tab -->
+            <div id="upload-tab" class="tab active">
+                <div class="section">
+                    <h2>📤 Upload CSV File</h2>
+                    
+                    <!-- Drag and Drop Area -->
+                    <div class="drag-drop-zone" id="dropZone">
+                        <div class="drag-drop-content">
+                            <p class="drag-drop-icon">📁</p>
+                            <p class="drag-drop-text">Drag and drop your CSV file here</p>
+                            <p class="drag-drop-subtext">or click to select</p>
+                        </div>
+                        <input type="file" id="fileInput" accept=".csv" hidden>
+                    </div>
+                    
+                    <!-- File Info -->
+                    <div id="fileInfo" class="file-info hidden">
+                        <h3>File Information</h3>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="label">File Name:</span>
+                                <span id="fileName" class="value">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Rows:</span>
+                                <span id="rowCount" class="value">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Columns:</span>
+                                <span id="columnCount" class="value">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">File Size:</span>
+                                <span id="fileSize" class="value">-</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Sample Data -->
+                        <h3 style="margin-top: 20px;">Sample Data (First 5 Rows)</h3>
+                        <div class="table-container">
+                            <table id="sampleTable">
+                                <thead id="sampleHead"></thead>
+                                <tbody id="sampleBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <!-- Validation Issues -->
+                    <div id="validationIssues" class="validation-issues hidden">
+                        <h3>⚠️ Validation Issues</h3>
+                        <ul id="issuesList"></ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Clean Tab -->
+            <div id="clean-tab" class="tab">
+                <div class="section">
+                    <h2>🧹 Clean Your Data</h2>
+                    
+                    <div class="cleaning-options">
+                        <div class="option">
+                            <label class="switch">
+                                <input type="checkbox" id="removeEmptyRows" checked>
+                                <span class="slider"></span>
+                            </label>
+                            <div class="option-info">
+                                <span class="option-title">Remove Empty Rows</span>
+                                <span class="option-desc">Delete rows where all values are null</span>
+                            </div>
+                        </div>
+
+                        <div class="option">
+                            <label class="switch">
+                                <input type="checkbox" id="removeEmptyColumns" checked>
+                                <span class="slider"></span>
+                            </label>
+                            <div class="option-info">
+                                <span class="option-title">Remove Empty Columns</span>
+                                <span class="option-desc">Delete columns where all values are null</span>
+                            </div>
+                        </div>
+
+                        <div class="option">
+                            <label class="switch">
+                                <input type="checkbox" id="trimWhitespace" checked>
+                                <span class="slider"></span>
+                            </label>
+                            <div class="option-info">
+                                <span class="option-title">Trim Whitespace</span>
+                                <span class="option-desc">Remove leading/trailing spaces</span>
+                            </div>
+                        </div>
+
+                        <div class="option">
+                            <label class="switch">
+                                <input type="checkbox" id="removeDuplicates" checked>
+                                <span class="slider"></span>
+                            </label>
+                            <div class="option-info">
+                                <span class="option-title">Remove Duplicates</span>
+                                <span class="option-desc">Delete duplicate rows</span>
+                            </div>
+                        </div>
+
+                        <div class="option">
+                            <label class="switch">
+                                <input type="checkbox" id="standardizeNames" checked>
+                                <span class="slider"></span>
+                            </label>
+                            <div class="option-info">
+                                <span class="option-title">Standardize Column Names</span>
+                                <span class="option-desc">Lowercase, remove spaces and special chars</span>
+                            </div>
+                        </div>
+
+                        <div class="option">
+                            <label class="switch">
+                                <input type="checkbox" id="fillMissing">
+                                <span class="slider"></span>
+                            </label>
+                            <div class="option-info">
+                                <span class="option-title">Fill Missing Values</span>
+                                <span class="option-desc">Replace null values</span>
+                            </div>
+                            <select id="fillMethod" class="sub-option" disabled>
+                                <option value="mean">Mean (numeric)</option>
+                                <option value="median">Median (numeric)</option>
+                                <option value="mode">Mode (all types)</option>
+                            </select>
+                        </div>
+
+                        <div class="option">
+                            <label class="switch">
+                                <input type="checkbox" id="normalizeText">
+                                <span class="slider"></span>
+                            </label>
+                            <div class="option-info">
+                                <span class="option-title">Normalize Text Case</span>
+                                <span class="option-desc">Convert text to consistent case</span>
+                            </div>
+                            <select id="textCase" class="sub-option" disabled>
+                                <option value="lower">Lowercase</option>
+                                <option value="upper">Uppercase</option>
+                                <option value="title">Title Case</option>
+                            </select>
+                        </div>
+
+                        <div class="option">
+                            <label class="switch">
+                                <input type="checkbox" id="removeOutliers">
+                                <span class="slider"></span>
+                            </label>
+                            <div class="option-info">
+                                <span class="option-title">Remove Outliers</span>
+                                <span class="option-desc">Delete anomalous rows</span>
+                            </div>
+                            <select id="outlierMethod" class="sub-option" disabled>
+                                <option value="iqr">IQR Method</option>
+                                <option value="zscore">Z-Score Method</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="cleanData()">🔧 Clean Data</button>
+                    <button class="btn btn-secondary" onclick="previewCleaning()">👁️ Preview Changes</button>
+
+                    <!-- Cleaning Results -->
+                    <div id="cleaningResults" class="cleaning-results hidden">
+                        <h3>✅ Cleaning Summary</h3>
+                        <ul id="changesList"></ul>
+                        <h3 style="margin-top: 20px;">New Data Preview</h3>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="label">Rows:</span>
+                                <span id="newRowCount" class="value">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Columns:</span>
+                                <span id="newColumnCount" class="value">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analyze Tab -->
+            <div id="analyze-tab" class="tab">
+                <div class="section">
+                    <h2>📊 Analyze Your Data</h2>
+                    
+                    <div class="analysis-buttons">
+                        <button class="btn btn-primary" onclick="validateData()">✅ Validate Data</button>
+                        <button class="btn btn-primary" onclick="analyzeData()">📈 Analyze Statistics</button>
+                        <button class="btn btn-primary" onclick="visualizeData()">📉 Generate Visualizations</button>
+                    </div>
+
+                    <!-- Quality Score -->
+                    <div id="qualityScoreSection" class="quality-score hidden">
+                        <h3>🎯 Data Quality Score</h3>
+                        <div class="score-display">
+                            <div class="score-circle">
+                                <span id="overallScore" class="score-value">0</span>
+                                <span class="score-label">/100</span>
+                            </div>
+                            <div class="score-breakdown">
+                                <div class="score-item">
+                                    <span>Null Score:</span>
+                                    <span id="nullScore">-</span>
+                                </div>
+                                <div class="score-item">
+                                    <span>Duplicate Score:</span>
+                                    <span id="duplicateScore">-</span>
+                                </div>
+                                <div class="score-item">
+                                    <span>Type Score:</span>
+                                    <span id="typeScore">-</span>
+                                </div>
+                                <div class="score-item">
+                                    <span>Anomaly Score:</span>
+                                    <span id="anomalyScore">-</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Statistics -->
+                    <div id="statisticsSection" class="statistics-section hidden">
+                        <h3>📈 Summary Statistics</h3>
+                        <div id="statsContainer" class="stats-container"></div>
+                    </div>
+
+                    <!-- Visualizations -->
+                    <div id="visualizationsSection" class="visualizations-section hidden">
+                        <h3>📉 Dashboard</h3>
+                        <div class="visualizations-grid">
+                            <div class="visualization-item">
+                                <img id="correlationHeatmap" src="" alt="Correlation Heatmap">
+                            </div>
+                            <div class="visualization-item">
+                                <img id="nullHeatmap" src="" alt="Null Heatmap">
+                            </div>
+                            <div class="visualization-item">
+                                <img id="missingDataChart" src="" alt="Missing Data">
+                            </div>
+                            <div class="visualization-item">
+                                <img id="dataTypesChart" src="" alt="Data Types">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Issues List -->
+                    <div id="issuesSection" class="issues-section hidden">
+                        <h3>⚠️ Data Quality Issues</h3>
+                        <ul id="issuesList2"></ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Export Tab -->
+            <div id="export-tab" class="tab">
+                <div class="section">
+                    <h2>📤 Export Results</h2>
+                    
+                    <div class="export-options">
+                        <div class="export-card">
+                            <h3>💾 Download Cleaned Data</h3>
+                            <p>Choose your preferred file format</p>
+                            <div class="export-format-selector">
+                                <select id="exportFormat" class="format-select">
+                                    <option value="csv">CSV (Comma Separated Values)</option>
+                                    <option value="excel">Excel (.xlsx)</option>
+                                    <option value="json">JSON (JavaScript Object Notation)</option>
+                                    <option value="tsv">TSV (Tab Separated Values)</option>
+                                    <option value="html">HTML Table</option>
+                                    <option value="parquet">Parquet (Binary Format)</option>
+                                </select>
+                                <button class="btn btn-success" onclick="exportData()">📥 Download Data</button>
+                            </div>
+                        </div>
+
+                        <div class="export-card">
+                            <h3>📄 Analysis Reports</h3>
+                            <p>Export your analysis results</p>
+                            <div class="button-group">
+                                <button class="btn btn-success" onclick="exportReport('md')">📋 Markdown Report</button>
+                                <button class="btn btn-success" onclick="exportReport('html')">🌐 HTML Report</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Summary -->
+                    <div id="exportSummary" class="export-summary hidden">
+                        <h3>📋 Processing Summary</h3>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="label">Original Rows:</span>
+                                <span id="originalRows" class="value">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Cleaned Rows:</span>
+                                <span id="cleanedRows" class="value">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Rows Removed:</span>
+                                <span id="rowsRemoved" class="value">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Processing Time:</span>
+                                <span id="processingTime" class="value">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Loading Indicator -->
+        <div id="loadingIndicator" class="loading-indicator hidden">
+            <div class="spinner"></div>
+            <p id="loadingText">Processing...</p>
+        </div>
+
+        <!-- Notification -->
+        <div id="notification" class="notification"></div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

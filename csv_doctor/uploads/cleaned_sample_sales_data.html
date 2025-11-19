@@ -1,0 +1,312 @@
+
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset="UTF-8">
+                <title>cleaned_sample_sales_data.html</title>
+                <style>
+                    body { font-family: Arial, sans-serif; margin: 20px; }
+                    table { border-collapse: collapse; width: 100%; }
+                    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+                    th { background-color: #3498db; color: white; }
+                    tr:nth-child(even) { background-color: #f2f2f2; }
+                </style>
+            </head>
+            <body>
+                <h1>Cleaned Data: sample_sales_data</h1>
+                <p>Total Rows: 25 | Total Columns: 9</p>
+                <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>product_id</th>
+      <th>product_name</th>
+      <th>category</th>
+      <th>price</th>
+      <th>quantity_sold</th>
+      <th>rating</th>
+      <th>date</th>
+      <th>stock_level</th>
+      <th>supplier_id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Laptop Pro</td>
+      <td>Electronics</td>
+      <td>1299.99</td>
+      <td>45</td>
+      <td>4.8</td>
+      <td>2023-01-15</td>
+      <td>120.0</td>
+      <td>S001</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>USB Cable</td>
+      <td>Electronics</td>
+      <td>9.99</td>
+      <td>500</td>
+      <td>4.2</td>
+      <td>2023-01-16</td>
+      <td>2000.0</td>
+      <td>S002</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Desk Chair</td>
+      <td>Furniture</td>
+      <td>249.99</td>
+      <td>28</td>
+      <td>4.5</td>
+      <td>2023-01-17</td>
+      <td>80.0</td>
+      <td>S003</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Monitor 27"</td>
+      <td>Electronics</td>
+      <td>399.99</td>
+      <td>35</td>
+      <td>4.6</td>
+      <td>2023-01-18</td>
+      <td>150.0</td>
+      <td>S001</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>Keyboard</td>
+      <td>Electronics</td>
+      <td>79.99</td>
+      <td>120</td>
+      <td>4.3</td>
+      <td>2023-01-19</td>
+      <td>400.0</td>
+      <td>S002</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>Mouse</td>
+      <td>Electronics</td>
+      <td>NaN</td>
+      <td>145</td>
+      <td>4.4</td>
+      <td>2023-01-20</td>
+      <td>600.0</td>
+      <td>S002</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>Desk Lamp</td>
+      <td>Furniture</td>
+      <td>45.99</td>
+      <td>68</td>
+      <td>4.1</td>
+      <td>2023-01-21</td>
+      <td>200.0</td>
+      <td>S004</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>Standing Desk</td>
+      <td>Furniture</td>
+      <td>599.99</td>
+      <td>15</td>
+      <td>4.7</td>
+      <td>2023-01-22</td>
+      <td>50.0</td>
+      <td>S003</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>Monitor Stand</td>
+      <td>Furniture</td>
+      <td>34.99</td>
+      <td>95</td>
+      <td>3.9</td>
+      <td>2023-01-23</td>
+      <td>300.0</td>
+      <td>S004</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>HDMI Cable</td>
+      <td>Electronics</td>
+      <td>12.99</td>
+      <td>300</td>
+      <td>4.5</td>
+      <td>2023-01-24</td>
+      <td>NaN</td>
+      <td>S002</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>Power Bank</td>
+      <td>Electronics</td>
+      <td>49.99</td>
+      <td>200</td>
+      <td>4.2</td>
+      <td>2023-01-25</td>
+      <td>500.0</td>
+      <td>S005</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>External SSD</td>
+      <td>Electronics</td>
+      <td>119.99</td>
+      <td>90</td>
+      <td>4.6</td>
+      <td>2023-01-26</td>
+      <td>250.0</td>
+      <td>S001</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>Office Chair</td>
+      <td>Furniture</td>
+      <td>199.99</td>
+      <td>40</td>
+      <td>4.4</td>
+      <td>2023-01-27</td>
+      <td>120.0</td>
+      <td>S003</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>Bookshelf</td>
+      <td>Furniture</td>
+      <td>149.99</td>
+      <td>25</td>
+      <td>4.0</td>
+      <td>2023-01-28</td>
+      <td>100.0</td>
+      <td>S004</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>Desk Organizer</td>
+      <td>Furniture</td>
+      <td>29.99</td>
+      <td>150</td>
+      <td>3.8</td>
+      <td>2023-01-29</td>
+      <td>600.0</td>
+      <td>S004</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>Screen Protector</td>
+      <td>Electronics</td>
+      <td>14.99</td>
+      <td>400</td>
+      <td>4.1</td>
+      <td>2023-01-30</td>
+      <td>1200.0</td>
+      <td>S002</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>Phone Stand</td>
+      <td>Electronics</td>
+      <td>19.99</td>
+      <td>250</td>
+      <td>4.3</td>
+      <td>2023-02-01</td>
+      <td>800.0</td>
+      <td>S005</td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td>Cable Organizer</td>
+      <td>Furniture</td>
+      <td>12.99</td>
+      <td>300</td>
+      <td>3.7</td>
+      <td>2023-02-02</td>
+      <td>900.0</td>
+      <td>S004</td>
+    </tr>
+    <tr>
+      <td>19</td>
+      <td>Monitor Arm</td>
+      <td>Furniture</td>
+      <td>89.99</td>
+      <td>55</td>
+      <td>4.5</td>
+      <td>2023-02-03</td>
+      <td>200.0</td>
+      <td>S003</td>
+    </tr>
+    <tr>
+      <td>20</td>
+      <td>USB Hub</td>
+      <td>Electronics</td>
+      <td>34.99</td>
+      <td>180</td>
+      <td>4.2</td>
+      <td>2023-02-04</td>
+      <td>NaN</td>
+      <td>S002</td>
+    </tr>
+    <tr>
+      <td>21</td>
+      <td>Desk Pad</td>
+      <td>Furniture</td>
+      <td>24.99</td>
+      <td>200</td>
+      <td>3.9</td>
+      <td>2023-02-05</td>
+      <td>700.0</td>
+      <td>S004</td>
+    </tr>
+    <tr>
+      <td>22</td>
+      <td>Portable Charger</td>
+      <td>Electronics</td>
+      <td>59.99</td>
+      <td>160</td>
+      <td>4.4</td>
+      <td>2023-02-06</td>
+      <td>400.0</td>
+      <td>S005</td>
+    </tr>
+    <tr>
+      <td>23</td>
+      <td>Document Holder</td>
+      <td>Furniture</td>
+      <td>14.99</td>
+      <td>220</td>
+      <td>3.6</td>
+      <td>2023-02-07</td>
+      <td>800.0</td>
+      <td>S004</td>
+    </tr>
+    <tr>
+      <td>24</td>
+      <td>Webcam</td>
+      <td>Electronics</td>
+      <td>79.99</td>
+      <td>75</td>
+      <td>4.5</td>
+      <td>2023-02-08</td>
+      <td>300.0</td>
+      <td>S001</td>
+    </tr>
+    <tr>
+      <td>25</td>
+      <td>Microphone</td>
+      <td>Electronics</td>
+      <td>129.99</td>
+      <td>50</td>
+      <td>4.6</td>
+      <td>2023-02-09</td>
+      <td>180.0</td>
+      <td>S005</td>
+    </tr>
+  </tbody>
+</table>
+            </body>
+            </html>
+            
